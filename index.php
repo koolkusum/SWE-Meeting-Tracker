@@ -15,6 +15,7 @@ session_start();
 </head>
 <body>
 
+	<a href="updateEvent.php">New Event</a>
 	<a href="logout.php">Logout</a>
 	<h1>This is the index page</h1>
 
