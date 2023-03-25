@@ -74,6 +74,9 @@ session_start();
 
 			<input id="text" type="text" name="user_name"><br><br>
 			<input id="text" type="password" name="password"><br><br>
+            <input id="text" type="First Name" name="Name"><br><br>
+            <input id="text" type="Last Name" name="last_name"><br><br>
+            <input id="text" type="Email" name="email"><br><br>
 
 			<input id="button" type="submit" value="Signup"><br><br>
 
