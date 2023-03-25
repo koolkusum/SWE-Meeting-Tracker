@@ -12,10 +12,11 @@ session_start();
 
         $id = 3; // The ID of the row to update
     	$query = "SELECT attendances FROM users WHERE user_name = '$user_netID'";
-		$new_num_of_attendances = mysqli_query($con, $query);
+		$result = mysqli_query($con, $query);
+		$new_num_of_attendances = mysqli_fetch_assoc($result)["attendances"] + 1;
         
 		//update 
-    	$query = "UPDATE users SET attendances = $new_num_of_attendances WHERE user_name = '$user_name'";
+    	$query = "UPDATE users SET attendances = $new_num_of_attendances WHERE user_name = '$user_netID'";
 
         mysqli_query($con, $query);
         echo "attendances++";
