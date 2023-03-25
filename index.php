@@ -15,8 +15,7 @@ session_start();
 		$new_num_of_attendances = mysqli_query($con, $query);
         
 		//update 
-		$new_attendance_count =
-    	$query = "UPDATE users SET attendances = $new_attendance_count WHERE user_name = '$user_name'";
+    	$query = "UPDATE users SET attendances = $new_num_of_attendances WHERE user_name = '$user_name'";
 
         mysqli_query($con, $query);
         echo "attendances++";
