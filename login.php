@@ -4,7 +4,7 @@ session_start();
 
 	include("connection.php");
 	include("functions.php");
-
+	include("sessionInfo.php");
 
 	if($_SERVER['REQUEST_METHOD'] == "POST")
 	{
@@ -31,6 +31,7 @@ session_start();
 
 						$_SESSION['user_id'] = $user_data['user_id'];
 						header("Location: index.php");
+						$user_netID = $user_name; 
 						die;
 					}
 				}
