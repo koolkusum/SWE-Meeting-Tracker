@@ -51,51 +51,72 @@ session_start();
 <html>
 <head>
 	<title>Login</title>
-</head>
-<body>
-
 	<style type="text/css">
-	
-	#text{
+	body {
+		font-family: Arial, sans-serif;
+		background-color: #f2f2f2;
+	}
 
-		height: 25px;
+	#box {
+		background-color: white;
 		border-radius: 5px;
-		padding: 4px;
-		border: solid thin #aaa;
-		width: 100%;
-	}
-
-	#button{
-
-		padding: 10px;
-		width: 100px;
-		color: white;
-		background-color: lightblue;
-		border: none;
-	}
-
-	#box{
-
-		background-color: grey;
+		box-shadow: 0 0 10px rgba(0,0,0,0.2);
 		margin: auto;
 		width: 300px;
 		padding: 20px;
 	}
 
+	h1 {
+		margin-top: 0;
+		text-align: center;
+		color: #444;
+	}
+
+	input[type="text"],
+	input[type="password"] {
+		height: 40px;
+		border-radius: 5px;
+		padding: 10px;
+		border: none;
+		width: 100%;
+		margin-bottom: 10px;
+		box-sizing: border-box;
+	}
+
+	input[type="submit"] {
+		padding: 10px 20px;
+		color: white;
+		background-color: #4CAF50;
+		border: none;
+		border-radius: 5px;
+		cursor: pointer;
+	}
+
+	input[type="submit"]:hover {
+		background-color: #3e8e41;
+	}
+
+	a {
+		color: #777;
+		text-decoration: none;
+	}
+
+	a:hover {
+		color: #000;
+	}
 	</style>
+</head>
+<body>
 
 	<div id="box">
-		
+		<h1>Login</h1>
 		<form method="post">
-			<div style="font-size: 20px;margin: 10px;color: white;">Login</div>
-
-			<input id="text" type="text" name="user_name"><br><br>
-			<input id="text" type="password" name="password"><br><br>
-
-			<input id="button" type="submit" value="Login"><br><br>
-
-			<a href="signup.php">Click to Signup</a><br><br>
+			<input type="text" name="user_name" placeholder="NetID"><br>
+			<input type="password" name="password" placeholder="Password"><br>
+			<input type="submit" value="Login"><br>
+			<p>Don't have an account? <a href="signup.php">Sign up</a></p>
 		</form>
 	</div>
+
 </body>
 </html>
