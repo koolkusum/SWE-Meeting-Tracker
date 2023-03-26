@@ -36,16 +36,75 @@ if (isset($_POST['deleteMember'])) {
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>My website</title>
     <style type="text/css">
+        body {
+            font-family: Calibri, sans-serif;
+        }
+
         form {
-            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        table {
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 10px;
+        }
+
+        th {
+            background-color: #c1c1c1;
+        }
+
+        td:first-child {
+            text-align: center;
+        }
+
+        td:last-child {
+            font-weight: bold;
         }
     </style>
 </head>
+
 <body>
-<a href="logout.php">Logout</a>
+
+    body {
+    font-family: Calibri, sans-serif;
+    }
+
+    form {
+    margin-bottom: 20px;
+    }
+
+    table {
+    border-collapse: collapse;
+    margin-top: 20px;
+    }
+
+    th, td {
+    border: 1px solid black;
+    padding: 10px;
+    }
+
+    th {
+    background-color: #c1c1c1;
+    }
+
+    td:first-child {
+    text-align: center;
+    }
+
+    td:last-child {
+    font-weight: bold;
+    }
+    <a href="logout.php">Logout</a>
     <h1>Admin Controls</h1>
     <form method="post">
         <input type="submit" name="startEvent" value="Start Event">
@@ -105,30 +164,30 @@ if (isset($_POST['deleteMember'])) {
         // Put your code here that will execute with the given inputs
     }
     ?>
-<table>
-  <caption>Member Attendance</caption>
-  <thead>
-    <tr>
-      <th>Member Name</th>
-      <th>NetID</th>
-      <th>General Meetings</th>
-      <th>Board Meetings</th>
-      <th>Major</th>
-      <th>Grad Year</th>
-    </tr>
-  </thead>
-  <tbody>
-    <?php
-    $query = "SELECT * FROM users";
-    $result = mysqli_query($con, $query);
-    while ($row = mysqli_fetch_assoc($result)) {
-      $memberName = $row['first_name'] . ' ' . $row['last_name'];
-      $memberNetID = $row['user_name'];
-      $attendanceCount = $row['attendances'];
-      $boardAttendanceCount = $row['board_meeting'];
-      $major = $row['major'];
-      $gradYear = $row['graduation_year'];
-      echo "<tr>
+    <table>
+        <caption>Member Attendance</caption>
+        <thead>
+            <tr>
+                <th>Member Name</th>
+                <th>NetID</th>
+                <th>General Meetings</th>
+                <th>Board Meetings</th>
+                <th>Major</th>
+                <th>Grad Year</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            $query = "SELECT * FROM users";
+            $result = mysqli_query($con, $query);
+            while ($row = mysqli_fetch_assoc($result)) {
+                $memberName = $row['first_name'] . ' ' . $row['last_name'];
+                $memberNetID = $row['user_name'];
+                $attendanceCount = $row['attendances'];
+                $boardAttendanceCount = $row['board_meeting'];
+                $major = $row['major'];
+                $gradYear = $row['graduation_year'];
+                echo "<tr>
               <td>$memberName</td>
               <td>$memberNetID</td>
               <td>$attendanceCount</td>
@@ -136,9 +195,10 @@ if (isset($_POST['deleteMember'])) {
               <td>$major</td>
               <td>$gradYear</td>
             </tr>";
-    }
-    ?>
-  </tbody>
-</table>
+            }
+            ?>
+        </tbody>
+    </table>
 </body>
+
 </html>
