@@ -53,6 +53,7 @@ if (isset($_POST['deleteMember'])) {
     <style type="text/css">
         body {
             font-family: Calibri, sans-serif;
+            font-size: 20px;
         }
 
         form {
@@ -101,6 +102,85 @@ if (isset($_POST['deleteMember'])) {
             padding: 20px;
             text-align: center;
         }
+        .green-btn {
+            display: inline-block;
+            padding: 20px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .red-btn {
+            display: inline-block;
+            padding: 20px 20px;
+            background-color: #f44336;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        h1 {
+    font-size: 24px;
+    margin-top: 30px;
+  }
+
+  form {
+    margin-bottom: 30px;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  input[type="text"],
+  input[type="number"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 10%;
+    margin-bottom: 20px;
+  }
+
+  button[type="submit"] {
+    background-color: #ccc;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+
+  button[type="submit"]:hover {
+    background-color: #555;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .success-msg {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 20px;
+  }
+
+  .error-msg {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 20px;
+  }
     </style>
 </head>
 
@@ -111,56 +191,57 @@ if (isset($_POST['deleteMember'])) {
     </div>
     <a href="logout.php" id="logout-btn">Logout</a>
     <h1>Event Controls</h1>
-    <form method="post" id="green-btn">
-        <input type="submit" name="startEvent" value="Start General Meeting">
+    <form method="post">
+        <input type="submit" name="startEvent" value="Start General Meeting" class="green-btn">
+        <input type="submit" name="endEvent" value="End General Meeting" class="red-btn">
     </form>
-    <form method="post" id="red-btn">
-        <input type="submit" name="endEvent" value="End General Meeting">
-    </form>
-    <br>
-    <form method="post" id="green-btn">
-        <input type="submit" name="startEventBoard" value="Start Board Meeting">
-    </form>
-    <form method="post" id="red-btn">
-        <input type="submit" name="endEventBoard" value="End Board Meeting">
+
+    <form method="post">
+        <input type="submit" name="startEventBoard" value="Start Board Meeting" class="green-btn">
+        <input type="submit" name="endEventBoard" value="End Board Meeting" class="red-btn">
     </form>
 
     <br>
 
     <h1>Delete User From Database</h1>
-    <form method="post">
-        <label for="netID">Enter NetID:</label>
-        <input type="text" name="netID" id="netID">
-        <input type="submit" name="submit" value="Execute">
-    </form>
-    <?php
-    if (isset($_POST['submit'])) {
-        $targetNetID = $_POST['netID'];
-        $query = "DELETE FROM users WHERE user_name = '$targetNetID'";
-        $userFoundAndDeleted = mysqli_query($con, $query);
-        if ($userFoundAndDeleted) {
-            echo '<script>alert("User deleted from database");</script>';
-        } else {
-            echo '<script>alert("User not found in database");</script>';
-        }
-        //refresh page
-        header("Location: " . $_SERVER['PHP_SELF']);
-        exit();
+<form method="post">
+  <label for="netID">Enter NetID:</label>
+  <input type="text" name="netID" id="netID">
+  <button type="submit" name="submit">Delete User</button>
+</form>
+
+<?php
+if (isset($_POST['submit'])) {
+    $targetNetID = $_POST['netID'];
+    $query = "DELETE FROM users WHERE user_name = '$targetNetID'";
+    $userFoundAndDeleted = mysqli_query($con, $query);
+    if (!$userFoundAndDeleted) {
+        echo '<div class="error-msg">User not found in database</div>';
+    } else {
+        echo '<div class="success-msg">User deleted from database</div>';
     }
-    ?>
-    <h1>Change Database</h1>
-    <form method="post">
-        <label>Enter NetID:</label>
-        <input type="text" name="textInput">
-        <br><br>
-        <label>Change general meetings by:</label>
-        <input type="number" name="integerInput1">
-        <br><br>
-        <label>Change board meetings by:</label>
-        <input type="number" name="integerInput2">
-        <br><br>
-        <input type="submit" name="execute" value="Execute">
-    </form>
+    // Refresh page
+    header("Location: " . $_SERVER['PHP_SELF']);
+    exit();
+}
+?>
+
+<h1>Change Database</h1>
+<form method="post">
+  <div class="form-group">
+    <label for="textInput">Enter NetID:</label>
+    <input type="text" name="textInput" id="textInput">
+  </div>
+  <div class="form-group">
+    <label for="integerInput1">Change general meetings by:</label>
+    <input type="number" name="integerInput1" id="integerInput1">
+  </div>
+  <div class="form-group">
+    <label for="integerInput2">Change board meetings by:</label>
+    <input type="number" name="integerInput2" id="integerInput2">
+  </div>
+  <button type="submit" name="execute">Execute</button>
+</form>
     <?php
     if (isset($_POST['execute'])) {
         $textInput = $_POST['textInput'];
@@ -171,11 +252,10 @@ if (isset($_POST['deleteMember'])) {
         $query2 = "UPDATE users SET board_meeting = (board_meeting + $integerInput2) WHERE user_name = '$textInput'";
         mysqli_query($con, $query1);
         mysqli_query($con, $query2);
-        echo '<script>alert("");</script>';
     }
     ?>
     <table>
-        <caption>Member Attendance</caption>
+        <h1>Member Attendance</h1>
         <thead>
             <tr>
                 <th>Member Name</th>

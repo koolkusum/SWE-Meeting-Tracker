@@ -102,9 +102,7 @@ if ($numcurr==1 && isset($_POST['submit']))
 		    border: none;
 		    border-radius: 5px;
 		    cursor: pointer;}
-            quote {
-    text-align:center;
-}
+            
     </style>
 </head>
 <body>

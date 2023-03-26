@@ -25,7 +25,8 @@ session_start();
     
             if ($user) {
                 // NetID or RUID already exists
-                echo "NetID or RUID already exists, please choose a different one.";
+                //echo "NetID or RUID already exists, please choose a different one.";
+                echo '<script>alert("NetID or RUID already exists, please choose a different one.");</script>';
             } else {
                 // Save to database
                 $user_id = random_num(20);
@@ -38,7 +39,7 @@ session_start();
                 die;
             }
         } else {
-            echo "Please enter valid information for all fields!";
+            echo '<script>alert("Please enter valid information for all fields!");</script>';
         }
     }
 ?>
@@ -117,7 +118,7 @@ session_start();
 </head>
 <body>
 <div id="header">
-        <h1>SWS Meeting Sign In</h1>
+        <h1>SWE Meeting Sign In</h1>
     </div>
 	<form method="post">
 		<h2>Sign up</h2>

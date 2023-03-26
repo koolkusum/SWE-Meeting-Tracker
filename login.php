@@ -38,10 +38,10 @@ session_start();
 				}
 			}
 			
-			echo "wrong username or password!";
+            echo '<script>alert("wrong username or password!");</script>';
 		}else
 		{
-			echo "wrong username or password!";
+			echo '<script>alert("wrong username or password!");</script>';
 		}
 	}
 
@@ -121,7 +121,7 @@ session_start();
 <body>
 
 <div id="header">
-        <h2>SWS Meeting Sign In</h2>
+        <h2>SWE Meeting Sign In</h2>
     </div>
 	<div id="box">
 		<h1>Login</h1>
