@@ -88,7 +88,10 @@ if (isset($_POST['deleteMember'])) {
         <input type="text" name="textInput">
         <br><br>
         <label>Change general meetings by:</label>
-        <input type="number" name="integerInput">
+        <input type="number" name="integerInput1">
+        <br><br>
+        <label>Change board meetings by:</label>
+        <input type="number" name="integerInput2">
         <br><br>
         <input type="submit" name="execute" value="Execute">
     </form>
@@ -96,14 +99,12 @@ if (isset($_POST['deleteMember'])) {
     <?php
     if (isset($_POST['execute'])) {
         $textInput = $_POST['textInput'];
-        $integerInput = $_POST['integerInput'];
-
-    	$query = "SELECT attendances FROM users WHERE user_name = '$textInput'";
-		$result = mysqli_query($con, $query);
-		$row = mysqli_fetch_assoc($result);
+        $integerInput1 = $_POST['integerInput1'];
+        $integerInput2 = $_POST['integerInput2'];
         
 		//update 
-    	$query1 = "UPDATE users SET attendances = (attendances + $integerInput) WHERE user_name = '$textInput'";
+    	$query1 = "UPDATE users SET attendances = (attendances + $integerInput1) WHERE user_name = '$textInput'";
+    	$query1 = "UPDATE users SET board_meeting = (board_meeting + $integerInput2) WHERE user_name = '$textInput'";
 
         mysqli_query($con, $query1);
         // Put your code here that will execute with the given inputs
