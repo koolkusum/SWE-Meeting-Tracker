@@ -26,6 +26,20 @@ if (isset($_POST['submit2'])) {
 
 <body>
 
+    <a href="logout.php">Logout</a>
+    <h1>This is the admin page</h1>
+
+    <form method="post">
+        <input type="submit" name="submit" value="Start Event">
+    </form>
+    <form method="post">
+        <input type="submit" name="submit2" value="End Event">
+    </form>
+
+    <br>
+    Hello,
+    <?php echo $user_data['user_name']; ?>
+
     <table>
         <thead>
             <tr>
@@ -73,20 +87,6 @@ if (isset($_POST['submit2'])) {
             ?>
         </tbody>
     </table>
-
-    <a href="logout.php">Logout</a>
-    <h1>This is the admin page</h1>
-
-    <form method="post">
-        <input type="submit" name="submit" value="Start Event">
-    </form>
-    <form method="post">
-        <input type="submit" name="submit2" value="End Event">
-    </form>
-
-    <br>
-    Hello,
-    <?php echo $user_data['user_name']; ?>
 </body>
 
 </html>
