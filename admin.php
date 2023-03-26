@@ -9,24 +9,35 @@ $user_data = check_login($con);
 if (isset($_POST['startEvent'])) {
     $query = "UPDATE users SET attended_current_event = 0 WHERE attended_current_event != 0";
     mysqli_query($con, $query);
+    echo '<script>alert("General event started");</script>';
 }
 if (isset($_POST['endEvent'])) {
-    $query = "UPDATE users SET attended_current_event = 1 WHERE attended_current_event != 1";
+    $query = "UPDATE users SET attended_current_event = 1 WHERE attended_current_event = 0";
     mysqli_query($con, $query);
+    echo '<script>alert("General event ended");</script>';
 }
 if (isset($_POST['startEventBoard'])) {
     $query = "UPDATE users SET attended_current_event = 2 WHERE attended_current_event != 2";
     mysqli_query($con, $query);
+    echo '<script>alert("Board event started");</script>';
 }
 if (isset($_POST['endEventBoard'])) {
-    $query = "UPDATE users SET attended_current_event = 1 WHERE attended_current_event != 1";
+    $query = "UPDATE users SET attended_current_event = 1 WHERE attended_current_event = 2";
     mysqli_query($con, $query);
+    echo '<script>alert("Board event ended");</script>';
 }
+
+//this method might be useless but I forgot so sorry about that lol
 if (isset($_POST['deleteMember'])) {
     $targetNetID = $_POST['deleteMember'];
     $query = "DELETE FROM users WHERE user_name = '$targetNetID'";
-    mysqli_query($con, $query);
+    $userFoundAndDeleted = mysqli_query($con, $query);
 
+    if ($userFoundAndDeleted) {
+        echo '<script>alert("User deleted from database");</script>';
+    } else {
+        echo '<script>alert("User not found in database");</script>';
+    }
     //refresh page
     header("Location: " . $_SERVER['PHP_SELF']);
     exit();
@@ -70,17 +81,20 @@ if (isset($_POST['deleteMember'])) {
         td:last-child {
             font-weight: bold;
         }
+
         #logout-btn {
             position: absolute;
             top: 10px;
             right: 10px;
             padding: 10px 20px;
-		    color: white;
-		    background-color: #4CAF50;
-		    border: none;
-		    border-radius: 5px;
-		    cursor: pointer;}
-            #header {
+            color: white;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #header {
             font-family: Calibri, sans-serif;
             background-color: #5A5377;
             color: #fff;
@@ -91,7 +105,7 @@ if (isset($_POST['deleteMember'])) {
 </head>
 
 <body>
-        <div id="header">
+    <div id="header">
         <h1>Admin Dashboard</h1>
         <a href="logout.php" id="logout-btn">Logout</a>
     </div>
@@ -123,7 +137,12 @@ if (isset($_POST['deleteMember'])) {
     if (isset($_POST['submit'])) {
         $targetNetID = $_POST['netID'];
         $query = "DELETE FROM users WHERE user_name = '$targetNetID'";
-        mysqli_query($con, $query);
+        $userFoundAndDeleted = mysqli_query($con, $query);
+        if ($userFoundAndDeleted) {
+            echo '<script>alert("User deleted from database");</script>';
+        } else {
+            echo '<script>alert("User not found in database");</script>';
+        }
         //refresh page
         header("Location: " . $_SERVER['PHP_SELF']);
         exit();
@@ -149,9 +168,10 @@ if (isset($_POST['deleteMember'])) {
         $integerInput2 = $_POST['integerInput2'];
         //update 
         $query1 = "UPDATE users SET attendances = (attendances + $integerInput1) WHERE user_name = '$textInput'";
-        $query1 = "UPDATE users SET board_meeting = (board_meeting + $integerInput2) WHERE user_name = '$textInput'";
+        $query2 = "UPDATE users SET board_meeting = (board_meeting + $integerInput2) WHERE user_name = '$textInput'";
         mysqli_query($con, $query1);
-        // Put your code here that will execute with the given inputs
+        mysqli_query($con, $query2);
+        echo '<script>alert("");</script>';
     }
     ?>
     <table>
