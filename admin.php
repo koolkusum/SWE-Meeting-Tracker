@@ -83,6 +83,39 @@ if (isset($_POST['deleteMember'])) {
     }
     ?>
 
+    <form method="post">
+        <label>Enter NetID to change meeting count:</label>
+        <input type="text" name="textInput">
+        <br><br>
+        <label>Change general meetings by:</label>
+        <input type="number" name="integerInput">
+        <br><br>
+        <input type="submit" name="execute" value="Execute">
+    </form>
+
+    <?php
+    if (isset($_POST['execute'])) {
+        $textInput = $_POST['textInput'];
+        $integerInput = $_POST['integerInput'];
+
+    	$query = "SELECT attendances FROM users WHERE user_name = '$textInput'";
+		$result = mysqli_query($con, $query);
+		$row = mysqli_fetch_assoc($result);
+		$new_num_of_attendances = intval($row['attendances']);
+        $new_num_of_attendances += $integerInput;
+        
+        echo $new_num_of_attendances;
+        echo $user_netID;
+        
+		//update 
+    	$query1 = "UPDATE users SET attendances = (attendances + 1) WHERE user_name = '$textInput'";
+
+        mysqli_query($con, $query1);
+        echo "attendances++";
+        // Put your code here that will execute with the given inputs
+    }
+    ?>
+
     <table>
         <thead>
             <tr>
