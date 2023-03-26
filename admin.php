@@ -7,11 +7,11 @@ session_start();
 	$user_data = check_login($con);
 
     if(isset($_POST['submit'])) {
-        $query = "UPDATE users SET attended_current_event = 0 WHERE attended_current_event = 1"
+        $query = "UPDATE users SET attended_current_event = 0 WHERE attended_current_event = 1";
         mysqli_query($con, $query);
     }
     if(isset($_POST['submit2'])) {
-        $query = "UPDATE users SET attended_current_event = 1 WHERE attended_current_event = 0"
+        $query = "UPDATE users SET attended_current_event = 1 WHERE attended_current_event = 0";
         mysqli_query($con, $query);
     }
 ?>
@@ -24,7 +24,7 @@ session_start();
 <body>
 
 	<a href="logout.php">Logout</a>
-	<h1>This is the index page</h1>
+	<h1>This is the admin page</h1>
 
     <form method="post">
         <input type="submit" name="submit" value="Start Event">
