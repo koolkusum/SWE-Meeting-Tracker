@@ -264,12 +264,13 @@ if (isset($_POST['submit'])) {
                 <th>Board Meetings</th>
                 <th>Major</th>
                 <th>Grad Year</th>
+                <th>Academic Status</th>
                 <th>Email</th>
             </tr>
         </thead>
         <tbody>
             <?php
-            $query = "SELECT * FROM users";
+            $query = "SELECT * FROM users ORDER BY attendances DESC";
             $result = mysqli_query($con, $query);
             while ($row = mysqli_fetch_assoc($result)) {
                 $memberName = $row['first_name'] . ' ' . $row['last_name'];
@@ -278,16 +279,18 @@ if (isset($_POST['submit'])) {
                 $boardAttendanceCount = $row['board_meeting'];
                 $major = $row['major'];
                 $gradYear = $row['graduation_year'];
+                $academic_status = $row['academic_status'];
                 $email=$row['email'];
                 echo "<tr>
-              <td>$memberName</td>
-              <td>$memberNetID</td>
-              <td>$attendanceCount</td>
-              <td>$boardAttendanceCount</td>
-              <td>$major</td>
-              <td>$gradYear</td>
-              <td>$email</td>
-            </tr>";
+                      <td>$memberName</td>
+                      <td>$memberNetID</td>
+                      <td>$attendanceCount</td>
+                      <td>$boardAttendanceCount</td>
+                      <td>$major</td>
+                      <td>$gradYear</td>
+                      <td>$academic_status</td>
+                      <td>$email</td>
+                    </tr>";
             }
             ?>
         </tbody>
