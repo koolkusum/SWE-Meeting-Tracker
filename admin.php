@@ -124,6 +124,8 @@ if (isset($_POST['deleteMember'])) {
                 $query = "SELECT major FROM users LIMIT $i, 1";
                 $result = mysqli_query($con, $query);
                 $major = mysqli_fetch_assoc($result)['major'];
+
+                echo "<p> $memberName\n NetID: $memberNetID\n attendances: $attendanceCount\n Major: $major\n grad year: $gradYear\n attendances: $attendanceCount\n\n</p>";
             }
             ?>
         </tbody>
