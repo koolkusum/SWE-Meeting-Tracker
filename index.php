@@ -2,7 +2,7 @@
 session_start();
 
 	include("connection.php");
-	include("functions.php");	
+	include("functions.php");
 	include("sessionInfo.php");
 
 
@@ -14,7 +14,7 @@ session_start();
 
     	$query = "SELECT attendances FROM users WHERE user_name = '$asdf'";
 		$result = mysqli_query($con, $query);
-        $row = mysqli_fetch_assoc($result);
+		$row = mysqli_fetch_assoc($result);
 		$new_num_of_attendances = intval($row['attendances']);
         $new_num_of_attendances++;
         
