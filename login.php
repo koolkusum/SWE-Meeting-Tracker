@@ -23,13 +23,14 @@ session_start();
 			{
 				if($result && mysqli_num_rows($result) > 0)
 				{
-
-					$user_data = mysqli_fetch_assoc($result);
-					
+					$user_data = mysqli_fetch_assoc($result);	
 					if($user_data['password'] === $password)
 					{
-
 						$_SESSION['user_id'] = $user_data['user_id'];
+						if($user_name == "admin"){
+							header("Location: admin.php");	
+							die;
+						}
 						header("Location: index.php");
 						$user_netID = $user_name; 
 						die;
