@@ -48,13 +48,7 @@ for ($i = 0; $i < $memberCount; $i++) {
     $result = mysqli_query($con, $query);
     $major = mysqli_fetch_assoc($result)['major'];
 
-    echo "<p> $memberName</p>";
-    echo "<p> NetID: $memberNetID</p>";
-    echo "<p> attendances: $attendanceCount</p>";
-    echo "<p> major: $major</p>";
-    echo "<p> grad year: $gradYear</p>";
-    echo "<p> attendances: $attendanceCount</p>";
-    echo "<p> </p>";
+    echo "<p> $memberName\n NetID: $memberNetID\n attendances: $attendanceCount\n Major: $major\n grad year: $gradYear\n attendances: $attendanceCount\n\n</p>";
 }
 
 ?>
