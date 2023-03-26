@@ -5,35 +5,42 @@ session_start();
 	include("functions.php");
 
 
-	if($_SERVER['REQUEST_METHOD'] == "POST")
-	{
-		//something was posted
-		$user_name = $_POST['user_name'];
-		$password = $_POST['password'];
-        $Name = $_POST['Name'];
+	if ($_SERVER['REQUEST_METHOD'] == "POST") {
+        // Something was posted
+        $user_name = $_POST['user_name'];
+        $password = $_POST['password'];
+        $first_name = $_POST['first_name'];
         $last_name = $_POST['last_name'];
         $ruid = $_POST['ruid'];
         $email = $_POST['email'];
-        $graduation_year=$_POST['graduation_year'];
-        $major=$_POST['major'];
-
-
-		if(!empty($user_name) && !empty($password) && !is_numeric($user_name)&&!empty($Name)&&!empty($graduation_year))
-		{
-
-			//save to database
-			$user_id = random_num(20);
-			$query = "insert into users (user_id,user_name,password) values ('$user_id','$user_name','$password')";
-
-			mysqli_query($con, $query);
-
-			header("Location: login.php");
-			die;
-		}else
-		{
-			echo "Please enter some valid information!";
-		}
-	}
+        $graduation_year = $_POST['graduation_year'];
+        $major = $_POST['major'];
+        $academic_status = $_POST['academic_status'];
+    
+        if (!empty($user_name) && !empty($password) && !is_numeric($user_name) && !empty($first_name) && !empty($graduation_year) && !empty($major) && !empty($last_name) && !empty($email) && !empty($ruid) && !empty($academic_status)) {
+    
+            $check_query = "SELECT user_id FROM users WHERE user_name='$user_name' OR ruid='$ruid' LIMIT 1";
+            $result = mysqli_query($con, $check_query);
+            $user = mysqli_fetch_assoc($result);
+    
+            if ($user) {
+                // NetID or RUID already exists
+                echo "NetID or RUID already exists, please choose a different one.";
+            } else {
+                // Save to database
+                $user_id = random_num(20);
+                $query = "INSERT INTO users (user_id,user_name,password,first_name,last_name,ruid,email,graduation_year,major,academic_status) 
+                VALUES ('$user_id','$user_name','$password','$first_name','$last_name','$ruid','$email','$graduation_year','$major','$academic_status')";
+    
+                mysqli_query($con, $query);
+    
+                header("Location: login.php");
+                die;
+            }
+        } else {
+            echo "Please enter valid information for all fields!";
+        }
+    }
 ?>
 
 
@@ -43,8 +50,16 @@ session_start();
 	<title>Signup</title>
 	<style type="text/css">
 		body {
+            font-family: Calibri, sans-serif;
 			background-color: #f1f1f1;
 		}
+        #header {
+            background-color: #5A5377;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
 		form {
 			background-color: #fff;
 			padding: 20px;
@@ -101,12 +116,14 @@ session_start();
 	</style>
 </head>
 <body>
-
+<div id="header">
+        <h1>SWS Meeting Sign In</h1>
+    </div>
 	<form method="post">
 		<h2>Sign up</h2>
 
 		<label> First Name</label>
-		<input type="text" name="Name">
+		<input type="text" name="first_name">
 
 		<label>Last Name</label>
 		<input type="text" name="last_name">
@@ -121,9 +138,15 @@ session_start();
 		<input type="text" name="major">
 
 		<label>Graduation Year</label>
-		<input type="text" name="graduation_year">
+		<input type="number" name="graduation_year">
+        
+        <label>Academic Status</label>
+		<select name="academic_status">
+			<option value="undergrad">Undergraduate</option>
+			<option value="grad">Graduate</option>
+		</select>
 
-		<label>Username</label>
+		<label>NetID</label>
 		<input type="text" name="user_name">
 
 		<label>Password</label>

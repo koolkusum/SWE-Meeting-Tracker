@@ -57,6 +57,13 @@ session_start();
 		font-family: Arial, sans-serif;
 		background-color: #f2f2f2;
 	}
+    #header {
+            background-color: #5A5377;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
 
 	#box {
 		background-color: white;
@@ -72,6 +79,10 @@ session_start();
 		text-align: center;
 		color: #444;
 	}
+    h2
+    {
+        color: #fff;
+    }
 
 	input[type="text"],
 	input[type="password"] {
@@ -109,6 +120,9 @@ session_start();
 </head>
 <body>
 
+<div id="header">
+        <h2>SWS Meeting Sign In</h2>
+    </div>
 	<div id="box">
 		<h1>Login</h1>
 		<form method="post">
