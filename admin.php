@@ -20,7 +20,7 @@ $result = mysqli_query($con, $query);
 $row = mysqli_fetch_assoc($result);
 $memberCount = $row['num_users'];
 
-for ($i = 1; $i <= $memberCount; $i++) {
+for ($i = 0; $i < $memberCount; $i++) {
 
     $query = "SELECT user_name FROM users LIMIT $i, 1";
     $result = mysqli_query($con, $query);
