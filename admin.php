@@ -16,6 +16,7 @@ if (isset($_POST['submit2'])) {
 }
 
 $query = "SELECT COUNT(*) as num_users FROM users";
+$result = mysqli_query($con, $query);
 $row = mysqli_fetch_assoc($result);
 $memberCount = $row['num_users'];
 
