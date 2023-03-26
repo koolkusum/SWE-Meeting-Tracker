@@ -145,6 +145,10 @@ if (isset($_POST['deleteMember'])) {
                 $result = mysqli_query($con, $query);
                 $attendanceCount = mysqli_fetch_assoc($result)['attendances'];
 
+                $query = "SELECT board_meetings FROM users LIMIT $i, 1";
+                $result = mysqli_query($con, $query);
+                $boardAttendanceCount = mysqli_fetch_assoc($result)['board_meetings'];
+
                 $query = "SELECT graduation_year FROM users LIMIT $i, 1";
                 $result = mysqli_query($con, $query);
                 $gradYear = mysqli_fetch_assoc($result)['graduation_year'];
@@ -153,7 +157,7 @@ if (isset($_POST['deleteMember'])) {
                 $result = mysqli_query($con, $query);
                 $major = mysqli_fetch_assoc($result)['major'];
 
-                echo "<p> $memberName\n NetID: $memberNetID\n attendances: $attendanceCount\n Major: $major\n grad year: $gradYear\n attendances: $attendanceCount\n\n</p>";
+                echo "<p> $memberName\n NetID: $memberNetID\n general meetings: $attendanceCount\n board meetings: $boardAttendanceCount\n Major: $major\n grad year: $gradYear\n attendances: $attendanceCount\n\n</p>";
             }
             ?>
         </tbody>
