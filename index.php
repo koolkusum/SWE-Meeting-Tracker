@@ -42,6 +42,10 @@ if ($numcurr==2 && isset($_POST['submit']))
     mysqli_query($con, $query3);
 
 }
+if ($numcurr==1 && isset($_POST['submit']))
+{
+    echo '<script>alert("You have already signed in!");</script>';
+}
 ?>
 
 <!DOCTYPE html>
