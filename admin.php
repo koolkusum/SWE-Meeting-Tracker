@@ -22,15 +22,39 @@ $memberCount = $row['num_users'];
 
 for ($i = 0; $i < $memberCount; $i++) {
 
+    // Combine first and last name
+    $query = "SELECT first_name FROM users LIMIT $i, 1";
+    $result = mysqli_query($con, $query);
+    $firstName = mysqli_fetch_assoc($result)['first_name'];
+    $query = "SELECT last_name FROM users LIMIT $i, 1";
+    $result = mysqli_query($con, $query);
+    $lastName = mysqli_fetch_assoc($result)['last_name'];
+    $memberName = "$firstName $lastName";
+
+    // NetID, attendance count, major, grad year
     $query = "SELECT user_name FROM users LIMIT $i, 1";
     $result = mysqli_query($con, $query);
-    $memberName = mysqli_fetch_assoc($result)['user_name'];
+    $memberNetID = mysqli_fetch_assoc($result)['user_name'];
 
     $query = "SELECT attendances FROM users LIMIT $i, 1";
     $result = mysqli_query($con, $query);
     $attendanceCount = mysqli_fetch_assoc($result)['attendances'];
 
-    echo "<p>$i: $memberName attendances: $attendanceCount</p>";
+    $query = "SELECT graduation_year FROM users LIMIT $i, 1";
+    $result = mysqli_query($con, $query);
+    $gradYear = mysqli_fetch_assoc($result)['graduation_year'];
+
+    $query = "SELECT major FROM users LIMIT $i, 1";
+    $result = mysqli_query($con, $query);
+    $major = mysqli_fetch_assoc($result)['major'];
+
+    echo "<p> $memberName</p>";
+    echo "<p> NetID: $memberNetID</p>";
+    echo "<p> attendances: $attendanceCount</p>";
+    echo "<p> major: $major</p>";
+    echo "<p> grad year: $gradYear</p>";
+    echo "<p> attendances: $attendanceCount</p>";
+    echo "<p> </p>";
 }
 
 ?>
