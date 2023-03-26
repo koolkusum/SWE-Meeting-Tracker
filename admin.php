@@ -14,7 +14,7 @@ if (isset($_POST['endEvent'])) {
     $query = "UPDATE users SET attended_current_event = 1 WHERE attended_current_event != 1";
     mysqli_query($con, $query);
 }
-if (isset($_POST['deleteMember'])) {
+if (isset($_POST['removeMember'])) {
     $targetNetID = $_POST['netID'];
     $query = "DELETE FROM users WHERE user_name = '$targetNetID'";
     mysqli_query($con, $query);
@@ -92,7 +92,7 @@ if (isset($_POST['deleteMember'])) {
 
                 $form = "post";
                 $submit = "submit";
-                $buttonName = "deleteMember";
+                $buttonName = "removeMember";
                 $value = "Delete $memberNetID";
 
                 echo "<p>$memberName<br>NetID: $memberNetID<br>Attendance Count: $attendanceCount<br>Major: $major<br>Graduation Year: $gradYear</p>";
