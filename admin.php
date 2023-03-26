@@ -26,8 +26,7 @@ for ($i = 1; $i <= $memberCount; $i++) {
     $memberName = mysqli_fetch_assoc($result);
     $query = "SELECT attendances FROM users LIMIT $i, 1";
     $result = mysqli_query($con, $query);
-    $row = mysqli_fetch_assoc($result);
-    $memberAttendances = intval($row['attendances']);
+    $memberAttendances = mysqli_fetch_assoc($result);
     echo "<p>$i: $memberName attendances: $memberAttendances</p>";
 }
 
