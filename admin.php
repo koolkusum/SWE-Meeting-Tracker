@@ -36,22 +36,24 @@ if (isset($_POST['deleteMember'])) {
 
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>My website</title>
+    <style type="text/css">
+        form {
+            display: inline-block;
+        }
+    </style>
 </head>
-
 <body>
-
-    <a href="logout.php">Logout</a>
-    <h1>This is the admin page</h1>
-
+<a href="logout.php">Logout</a>
+    <h1>Admin Controls</h1>
     <form method="post">
         <input type="submit" name="startEvent" value="Start Event">
     </form>
     <form method="post">
         <input type="submit" name="endEvent" value="End Event">
     </form>
+    <br>
     <form method="post">
         <input type="submit" name="startEventBoard" value="Start Board Event">
     </form>
@@ -69,20 +71,16 @@ if (isset($_POST['deleteMember'])) {
         <input type="text" name="netID" id="netID">
         <input type="submit" name="submit" value="Execute">
     </form>
-
     <?php
     if (isset($_POST['submit'])) {
-
         $targetNetID = $_POST['netID'];
         $query = "DELETE FROM users WHERE user_name = '$targetNetID'";
         mysqli_query($con, $query);
-
         //refresh page
         header("Location: " . $_SERVER['PHP_SELF']);
         exit();
     }
     ?>
-
     <form method="post">
         <label>Enter NetID to change meeting count:</label>
         <input type="text" name="textInput">
@@ -95,73 +93,52 @@ if (isset($_POST['deleteMember'])) {
         <br><br>
         <input type="submit" name="execute" value="Execute">
     </form>
-
     <?php
     if (isset($_POST['execute'])) {
         $textInput = $_POST['textInput'];
         $integerInput1 = $_POST['integerInput1'];
         $integerInput2 = $_POST['integerInput2'];
-        
-		//update 
-    	$query1 = "UPDATE users SET attendances = (attendances + $integerInput1) WHERE user_name = '$textInput'";
-    	$query1 = "UPDATE users SET board_meeting = (board_meeting + $integerInput2) WHERE user_name = '$textInput'";
-
+        //update 
+        $query1 = "UPDATE users SET attendances = (attendances + $integerInput1) WHERE user_name = '$textInput'";
+        $query1 = "UPDATE users SET board_meeting = (board_meeting + $integerInput2) WHERE user_name = '$textInput'";
         mysqli_query($con, $query1);
         // Put your code here that will execute with the given inputs
     }
     ?>
-
-    <table>
-        <thead>
-            <tr>
-                <th>Member Name</th>
-                <th>Attendance Count</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            $query = "SELECT COUNT(*) as num_users FROM users";
-            $result = mysqli_query($con, $query);
-            $row = mysqli_fetch_assoc($result);
-            $memberCount = $row['num_users'];
-
-            for ($i = 0; $i < $memberCount; $i++) {
-
-                // Combine first and last name
-                $query = "SELECT first_name FROM users LIMIT $i, 1";
-                $result = mysqli_query($con, $query);
-                $firstName = mysqli_fetch_assoc($result)['first_name'];
-                $query = "SELECT last_name FROM users LIMIT $i, 1";
-                $result = mysqli_query($con, $query);
-                $lastName = mysqli_fetch_assoc($result)['last_name'];
-                $memberName = "$firstName $lastName";
-
-                // NetID, attendance count, major, grad year
-                $query = "SELECT user_name FROM users LIMIT $i, 1";
-                $result = mysqli_query($con, $query);
-                $memberNetID = mysqli_fetch_assoc($result)['user_name'];
-
-                $query = "SELECT attendances FROM users LIMIT $i, 1";
-                $result = mysqli_query($con, $query);
-                $attendanceCount = mysqli_fetch_assoc($result)['attendances'];
-
-                $query = "SELECT board_meeting FROM users LIMIT $i, 1";
-                $result = mysqli_query($con, $query);
-                $boardAttendanceCount = mysqli_fetch_assoc($result)['board_meeting'];
-
-                $query = "SELECT graduation_year FROM users LIMIT $i, 1";
-                $result = mysqli_query($con, $query);
-                $gradYear = mysqli_fetch_assoc($result)['graduation_year'];
-
-                $query = "SELECT major FROM users LIMIT $i, 1";
-                $result = mysqli_query($con, $query);
-                $major = mysqli_fetch_assoc($result)['major'];
-
-                echo "<p> $memberName\n NetID: $memberNetID\n general meetings: $attendanceCount\n board meetings: $boardAttendanceCount\n Major: $major\n grad year: $gradYear\n attendances: $attendanceCount\n\n</p>";
-            }
-            ?>
-        </tbody>
-    </table>
+<table>
+  <caption>Member Attendance</caption>
+  <thead>
+    <tr>
+      <th>Member Name</th>
+      <th>NetID</th>
+      <th>General Meetings</th>
+      <th>Board Meetings</th>
+      <th>Major</th>
+      <th>Grad Year</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php
+    $query = "SELECT * FROM users";
+    $result = mysqli_query($con, $query);
+    while ($row = mysqli_fetch_assoc($result)) {
+      $memberName = $row['first_name'] . ' ' . $row['last_name'];
+      $memberNetID = $row['user_name'];
+      $attendanceCount = $row['attendances'];
+      $boardAttendanceCount = $row['board_meeting'];
+      $major = $row['major'];
+      $gradYear = $row['graduation_year'];
+      echo "<tr>
+              <td>$memberName</td>
+              <td>$memberNetID</td>
+              <td>$attendanceCount</td>
+              <td>$boardAttendanceCount</td>
+              <td>$major</td>
+              <td>$gradYear</td>
+            </tr>";
+    }
+    ?>
+  </tbody>
+</table>
 </body>
-
 </html>
