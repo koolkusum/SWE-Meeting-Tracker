@@ -10,8 +10,15 @@ session_start();
 		//something was posted
 		$user_name = $_POST['user_name'];
 		$password = $_POST['password'];
+        $Name = $_POST['Name'];
+        $last_name = $_POST['last_name'];
+        $ruid = $_POST['ruid'];
+        $email = $_POST['email'];
+        $graduation_year=$_POST['graduation_year'];
+        $major=$_POST['major'];
 
-		if(!empty($user_name) && !empty($password) && !is_numeric($user_name))
+
+		if(!empty($user_name) && !empty($password) && !is_numeric($user_name)&&!empty($Name)&&!empty($graduation_year))
 		{
 
 			//save to database
@@ -34,54 +41,100 @@ session_start();
 <html>
 <head>
 	<title>Signup</title>
+	<style type="text/css">
+		body {
+			background-color: #f1f1f1;
+		}
+		form {
+			background-color: #fff;
+			padding: 20px;
+			max-width: 500px;
+			margin: 50px auto;
+			border-radius: 5px;
+			box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+		}
+		form h2 {
+			font-size: 30px;
+			font-weight: 600;
+			margin-top: 0px;
+			margin-bottom: 20px;
+			color: #333;
+		}
+		form label {
+			font-size: 18px;
+			display: block;
+			margin-bottom: 5px;
+			color: #333;
+		}
+		form input[type="text"], form input[type="password"], form input[type="number"] {
+			height: 40px;
+			border-radius: 5px;
+			padding: 0px 10px;
+			border: none;
+			width: 100%;
+			font-size: 16px;
+			margin-bottom: 20px;
+			box-sizing: border-box;
+			border: solid thin #aaa;
+		}
+		form input[type="submit"] {
+			background-color: #1877f2;
+			color: #fff;
+			border: none;
+			padding: 10px 20px;
+			font-size: 18px;
+			border-radius: 5px;
+			cursor: pointer;
+			transition: background-color 0.2s ease-in-out;
+		}
+		form input[type="submit"]:hover {
+			background-color: #166fe5;
+		}
+		form a {
+			color: #333;
+			text-decoration: none;
+			font-size: 16px;
+		}
+		form a:hover {
+			color: #1877f2;
+		}
+	</style>
 </head>
 <body>
 
-	<style type="text/css">
-	
-	#text{
+	<form method="post">
+		<h2>Sign up</h2>
 
-		height: 25px;
-		border-radius: 5px;
-		padding: 4px;
-		border: solid thin #aaa;
-		width: 100%;
-	}
+		<label> First Name</label>
+		<input type="text" name="Name">
 
-	#button{
+		<label>Last Name</label>
+		<input type="text" name="last_name">
 
-		padding: 10px;
-		width: 100px;
-		color: white;
-		background-color: lightblue;
-		border: none;
-	}
+		<label>RUID</label>
+		<input type="number" name="ruid">
 
-	#box{
+		<label>Email</label>
+		<input type="text" name="email">
 
-		background-color: grey;
-		margin: auto;
-		width: 300px;
-		padding: 20px;
-	}
+		<label>Major</label>
+		<input type="text" name="major">
 
-	</style>
+		<label>Graduation Year</label>
+		<input type="text" name="graduation_year">
 
-	<div id="box">
-		
-		<form method="post">
-			<div style="font-size: 20px;margin: 10px;color: white;">Signup</div>
+		<label>Username</label>
+		<input type="text" name="user_name">
 
-			<input id="text" type="text" name="user_name"><br><br>
-			<input id="text" type="password" name="password"><br><br>
-            <input id="text" type="First Name" name="Name"><br><br>
-            <input id="text" type="Last Name" name="last_name"><br><br>
-            <input id="text" type="Email" name="email"><br><br>
+		<label>Password</label>
+		<input type="password" name="password">
 
-			<input id="button" type="submit" value="Signup"><br><br>
+		<input type="submit" value="Sign up">
 
-			<a href="login.php">Click to Login</a><br><br>
-		</form>
-	</div>
+		<div style="margin-top: 20px;">
+			Already have an account? <a href="login.php">Click to Login</a>
+		</div>
+	</form>
+
 </body>
 </html>

@@ -10,15 +10,21 @@ session_start();
 
     if(isset($_POST['submit'])) {
 
-        $id = 3; // The ID of the row to update
-    	$query = "SELECT attendances FROM users WHERE user_name = '$user_netID'";
+        $asdf = $user_data['user_name'];
+
+    	$query = "SELECT attendances FROM users WHERE user_name = '$asdf'";
 		$result = mysqli_query($con, $query);
-		$new_num_of_attendances = mysqli_fetch_assoc($result)["attendances"] + 1;
+        $row = mysqli_fetch_assoc($result);
+		$new_num_of_attendances = intval($row['attendances']);
+        $new_num_of_attendances++;
+        
+        echo $new_num_of_attendances;
+        echo $user_netID;
         
 		//update 
-    	$query = "UPDATE users SET attendances = $new_num_of_attendances WHERE user_name = '$user_netID'";
+    	$query1 = "UPDATE users SET attendances = (attendances + 1) WHERE user_name = '$asdf'";
 
-        mysqli_query($con, $query);
+        mysqli_query($con, $query1);
         echo "attendances++";
       }
 ?>

@@ -4,7 +4,7 @@ session_start();
     include("functions.php");
 
 
-    $query = "UPDATE users SET attended_current_event = 0 WHERE attended_current_event = 1"
-    mysqli_query($con, $query);
+    $query = "UPDATE users SET attended_current_event = 0 WHERE attended_current_event = 1";
+    $result =mysqli_query($con, $query);
 
 ?>
