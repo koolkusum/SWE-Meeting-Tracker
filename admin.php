@@ -70,63 +70,52 @@ if (isset($_POST['deleteMember'])) {
         td:last-child {
             font-weight: bold;
         }
+        #logout-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 10px 20px;
+		    color: white;
+		    background-color: #4CAF50;
+		    border: none;
+		    border-radius: 5px;
+		    cursor: pointer;}
+            #header {
+            font-family: Calibri, sans-serif;
+            background-color: #5A5377;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
     </style>
 </head>
 
 <body>
-
-    body {
-    font-family: Calibri, sans-serif;
-    }
-
-    form {
-    margin-bottom: 20px;
-    }
-
-    table {
-    border-collapse: collapse;
-    margin-top: 20px;
-    }
-
-    th, td {
-    border: 1px solid black;
-    padding: 10px;
-    }
-
-    th {
-    background-color: #c1c1c1;
-    }
-
-    td:first-child {
-    text-align: center;
-    }
-
-    td:last-child {
-    font-weight: bold;
-    }
-    <a href="logout.php">Logout</a>
-    <h1>Admin Controls</h1>
-    <form method="post">
-        <input type="submit" name="startEvent" value="Start Event">
+        <div id="header">
+        <h1>Admin Dashboard</h1>
+        <a href="logout.php" id="logout-btn">Logout</a>
+    </div>
+    <a href="logout.php" id="logout-btn">Logout</a>
+    <h1>Event Controls</h1>
+    <form method="post" id="green-btn">
+        <input type="submit" name="startEvent" value="Start General Meeting">
     </form>
-    <form method="post">
-        <input type="submit" name="endEvent" value="End Event">
+    <form method="post" id="red-btn">
+        <input type="submit" name="endEvent" value="End General Meeting">
     </form>
     <br>
-    <form method="post">
-        <input type="submit" name="startEventBoard" value="Start Board Event">
+    <form method="post" id="green-btn">
+        <input type="submit" name="startEventBoard" value="Start Board Meeting">
     </form>
-    <form method="post">
-        <input type="submit" name="endEventBoard" value="End Board Event">
+    <form method="post" id="red-btn">
+        <input type="submit" name="endEventBoard" value="End Board Meeting">
     </form>
 
     <br>
-    Hello,
-    <?php echo $user_data['user_name']; ?>
 
-    <h1>Delete From Database</h1>
+    <h1>Delete User From Database</h1>
     <form method="post">
-        <label for="netID">Delete NetID from database here:</label>
+        <label for="netID">Enter NetID:</label>
         <input type="text" name="netID" id="netID">
         <input type="submit" name="submit" value="Execute">
     </form>
@@ -140,8 +129,9 @@ if (isset($_POST['deleteMember'])) {
         exit();
     }
     ?>
+    <h1>Change Database</h1>
     <form method="post">
-        <label>Enter NetID to change meeting count:</label>
+        <label>Enter NetID:</label>
         <input type="text" name="textInput">
         <br><br>
         <label>Change general meetings by:</label>
