@@ -101,17 +101,11 @@ if (isset($_POST['deleteMember'])) {
     	$query = "SELECT attendances FROM users WHERE user_name = '$textInput'";
 		$result = mysqli_query($con, $query);
 		$row = mysqli_fetch_assoc($result);
-		$new_num_of_attendances = intval($row['attendances']);
-        $new_num_of_attendances += $integerInput;
-        
-        echo $new_num_of_attendances;
-        echo $user_netID;
         
 		//update 
-    	$query1 = "UPDATE users SET attendances = (attendances + 1) WHERE user_name = '$textInput'";
+    	$query1 = "UPDATE users SET attendances = (attendances + $integerInput) WHERE user_name = '$textInput'";
 
         mysqli_query($con, $query1);
-        echo "attendances++";
         // Put your code here that will execute with the given inputs
     }
     ?>
