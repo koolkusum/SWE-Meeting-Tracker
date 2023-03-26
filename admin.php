@@ -264,6 +264,7 @@ if (isset($_POST['submit'])) {
                 <th>Board Meetings</th>
                 <th>Major</th>
                 <th>Grad Year</th>
+                <th>Email</th>
             </tr>
         </thead>
         <tbody>
@@ -277,6 +278,7 @@ if (isset($_POST['submit'])) {
                 $boardAttendanceCount = $row['board_meeting'];
                 $major = $row['major'];
                 $gradYear = $row['graduation_year'];
+                $email=$row['email'];
                 echo "<tr>
               <td>$memberName</td>
               <td>$memberNetID</td>
@@ -284,6 +286,7 @@ if (isset($_POST['submit'])) {
               <td>$boardAttendanceCount</td>
               <td>$major</td>
               <td>$gradYear</td>
+              <td>$email</td>
             </tr>";
             }
             ?>
