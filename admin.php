@@ -14,8 +14,16 @@ if (isset($_POST['endEvent'])) {
     $query = "UPDATE users SET attended_current_event = 1 WHERE attended_current_event != 1";
     mysqli_query($con, $query);
 }
-if (isset($_POST['removeMember'])) {
-    $targetNetID = $_POST['netID'];
+if (isset($_POST['startEventBoard'])) {
+    $query = "UPDATE users SET attended_current_event = 2 WHERE attended_current_event != 2";
+    mysqli_query($con, $query);
+}
+if (isset($_POST['endEventBoard'])) {
+    $query = "UPDATE users SET attended_current_event = 1 WHERE attended_current_event != 1";
+    mysqli_query($con, $query);
+}
+if (isset($_POST['deleteMember'])) {
+    $targetNetID = $_POST['deleteMember'];
     $query = "DELETE FROM users WHERE user_name = '$targetNetID'";
     mysqli_query($con, $query);
 
@@ -23,6 +31,7 @@ if (isset($_POST['removeMember'])) {
     header("Location: " . $_SERVER['PHP_SELF']);
     exit();
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -43,10 +52,36 @@ if (isset($_POST['removeMember'])) {
     <form method="post">
         <input type="submit" name="endEvent" value="End Event">
     </form>
+    <form method="post">
+        <input type="submit" name="startEventBoard" value="Start Board Event">
+    </form>
+    <form method="post">
+        <input type="submit" name="endEventBoard" value="End Board Event">
+    </form>
 
     <br>
     Hello,
     <?php echo $user_data['user_name']; ?>
+
+    <h1>Delete From Database</h1>
+    <form method="post">
+        <label for="netID">Delete NetID from database here:</label>
+        <input type="text" name="netID" id="netID">
+        <input type="submit" name="submit" value="Execute">
+    </form>
+
+    <?php
+    if (isset($_POST['submit'])) {
+
+        $targetNetID = $_POST['netID'];
+        $query = "DELETE FROM users WHERE user_name = '$targetNetID'";
+        mysqli_query($con, $query);
+
+        //refresh page
+        header("Location: " . $_SERVER['PHP_SELF']);
+        exit();
+    }
+    ?>
 
     <table>
         <thead>
@@ -89,16 +124,6 @@ if (isset($_POST['removeMember'])) {
                 $query = "SELECT major FROM users LIMIT $i, 1";
                 $result = mysqli_query($con, $query);
                 $major = mysqli_fetch_assoc($result)['major'];
-
-                $form = "post";
-                $submit = "submit";
-                $buttonName = "removeMember";
-                $value = "Delete $memberNetID";
-
-                echo "<p>$memberName<br>NetID: $memberNetID<br>Attendance Count: $attendanceCount<br>Major: $major<br>Graduation Year: $gradYear</p>";
-                echo "<form method='$form'>";
-                echo "<button type='$submit' name='$buttonName' value='$memberNetID'>$value</button>";
-                echo "</form>";
             }
             ?>
         </tbody>
