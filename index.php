@@ -108,7 +108,7 @@ if ($numcurr==1 && isset($_POST['submit']))
 <body>
 
 	<div id="header">
-        <h1>Welcome <?php echo $user_data['user_name'];?></h1>
+        <h1>Welcome <?php echo $user_data['first_name'];?></h1>
         <a href="logout.php" id="logout-btn">Logout</a>
     </div>
 

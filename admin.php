@@ -260,6 +260,7 @@ if (isset($_POST['submit'])) {
             <tr>
                 <th>Member Name</th>
                 <th>NetID</th>
+                <th>RUID</th>
                 <th>General Meetings</th>
                 <th>Board Meetings</th>
                 <th>Major</th>
@@ -275,6 +276,7 @@ if (isset($_POST['submit'])) {
             while ($row = mysqli_fetch_assoc($result)) {
                 $memberName = $row['first_name'] . ' ' . $row['last_name'];
                 $memberNetID = $row['user_name'];
+                $memberRUID=$row['ruid'];
                 $attendanceCount = $row['attendances'];
                 $boardAttendanceCount = $row['board_meeting'];
                 $major = $row['major'];
@@ -284,6 +286,7 @@ if (isset($_POST['submit'])) {
                 echo "<tr>
                       <td>$memberName</td>
                       <td>$memberNetID</td>
+                      <td>$memberRUID</td>
                       <td>$attendanceCount</td>
                       <td>$boardAttendanceCount</td>
                       <td>$major</td>
